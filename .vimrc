@@ -1,4 +1,5 @@
 colo ron
+syntax on
 
 filetype plugin indent on
 set tabstop=4
