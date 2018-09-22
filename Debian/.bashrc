@@ -118,4 +118,3 @@ if ! shopt -oq posix; then
   fi
 fi
 
-umask 022

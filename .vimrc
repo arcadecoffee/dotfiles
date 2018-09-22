@@ -1,4 +1,6 @@
 colo ron
+set laststatus=2
+
 
 filetype plugin indent on
 set tabstop=4
