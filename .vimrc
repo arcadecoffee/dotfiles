@@ -1,4 +1,5 @@
 colo ron
+syntax on
 set laststatus=2
 
 
