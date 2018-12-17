@@ -1,11 +1,15 @@
-colo ron
+" Load defaults
+source $VIMRUNTIME/defaults.vim
+
+" Visual aids
 set laststatus=2
 set cc=80
-set ruler
-syntax on
 highlight ColorColumn ctermbg=black
 
-filetype plugin indent on
+" Spaces not tabs, default width 4
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" Overriding tabsize for ruby to 2
+autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
