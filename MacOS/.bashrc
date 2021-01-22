@@ -93,6 +93,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias sosume='sudo -i'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -132,10 +133,16 @@ docker-kill () { docker kill $(docker ps -qf name=$1) /bin/bash; }
 docker-nuke () { docker kill $(docker ps -q); docker rm $(docker ps -aq); docker rmi -f $(docker images -aq); }
 
 # function for connecting to rancher hosts
-rssh () { ssh -i ~/.ssh/dataplaform-emr.pem -p 10648 ubuntu@$1; }
+rssh () { ssh -i ~/.ssh/dataplatform-emr.pem -p 10648 ubuntu@$1; }
 
-# AWS ecr login
+# AWS stuff
+set-aws-profile () { export AWS_PROFILE=$1; }
 ecr-login () { aws ecr get-login-password | docker login --username AWS --password-stdin 850077434821.dkr.ecr.us-east-1.amazonaws.com; }
 
 # Git stuff
 alias git-reset='git checkout master && git fetch && git pull'
+
+function update-remote() {
+  repoName=$(git config --get remote.origin.url | sed 's:.*/::')
+  git remote set-url origin "ssh://git@gitlab.com/storable/analytics/$repoName"
+}
