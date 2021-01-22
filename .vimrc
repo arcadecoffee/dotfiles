@@ -11,5 +11,11 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" Alias Q to q becasue typing reasons
+command Q q
+
+" Disable mouse integration 'cause reasons
+set mouse=
+
 " Overriding tabsize for ruby to 2
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
