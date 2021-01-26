@@ -1,8 +1,8 @@
 export CLICOLOR=1
 
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ll='ls -AlFh'
+alias la='ls -Ah'
+alias l='ls -CFh'
 alias sosume='sudo -i'
 
 alias grep='grep --color=auto'
@@ -80,6 +80,8 @@ git_info() {
 PS1='
 $(ssh_info)%{$fg[blue]%}%~%u $(git_info)
 %(?.%{$fg[blue]%}.%{$fg[red]%})%(!.#.❯)%{$reset_color%} '
+
+eval "$(pyenv init -)"
 
 # some helper functions for working with Docker
 function docker-log () { docker logs -f $(docker ps -qf name=$1); }
