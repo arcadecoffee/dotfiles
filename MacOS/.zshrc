@@ -15,19 +15,13 @@ else
 	color_prompt=
 fi
 
+setopt prompt_subst
 autoload -U colors && colors # Enable colors in prompt
 
-# Load version control information
-autoload -Uz vcs_info
-precmd() { vcs_info }
-
-# Format the vcs_info_msg_0_ variable
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' unstagedstr '+'
-zstyle ':vcs_info:*' stagedstr '+'
-zstyle ':vcs_info:*' 
-zstyle ':vcs_info:*' formats '(%b%c%u) '
-
+# Echoes a username/host string when connected over SSH (empty otherwise)
+ssh_info() {
+  [[ "$SSH_CONNECTION" != '' ]] && echo '%(!.%{$fg[red]%}.%{$fg[yellow]%})%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%}:' || echo ''
+}
 
 # Echoes information about Git repository status when inside a Git repository
 git_info() {
@@ -85,11 +79,9 @@ git_info() {
 
 }
 
-# Set up the prompt (with git branch name)
-setopt PROMPT_SUBST
-
-# Prompt = '[time] user@host:path (git branch, if exists) $ '
-PROMPT='%B%F{green}%n@%m%f:%F{blue}%(4~|%-1~/.../%2~|%~)%f %F{172}${vcs_info_msg_0_}%f%b $(git_info)%f $ '
+PS1='
+$(ssh_info)%{$fg[magenta]%}%~%u $(git_info)
+%(?.%{$fg[blue]%}.%{$fg[red]%})%(!.#.❯)%{$reset_color%} '
 
 # some helper functions for working with Docker
 function docker-log () { docker logs -f $(docker ps -qf name=$1); }
