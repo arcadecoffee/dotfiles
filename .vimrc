@@ -19,3 +19,6 @@ set mouse=
 
 " Overriding tabsize for ruby to 2
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
+
+syntax on
+
