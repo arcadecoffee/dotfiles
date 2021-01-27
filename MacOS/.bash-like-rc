@@ -1,0 +1,43 @@
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# Load aliases & functions
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
+fi
+
+. /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=1
+
+case $0 in
+	*zsh)
+		setopt auto_pushd
+		setopt append_history
+		setopt prompt_subst
+		autoload -U colors && colors
+		PS1='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%})%n@%m%{$reset_color%}:%{$fg_bold[blue]%}%(5~|%-1~/…/%3~|%4~)%{$fg_bold[yellow]%}$(__git_ps1)%{$reset_color%} %% '
+	;;
+
+	*bash)
+		shopt -s checkwinsize
+		. /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+	
+		if [ $UID = 0 ]; then
+			idcolor=31
+		else
+			idcolor=32
+		fi
+		PS1="\[\e[1;(${idcolor})m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[33m\]\$(__git_ps1 \" (%s)\") \[\e[00m\]\$ "
+		unset idcolor
+		
+		PROMPT_DIRTRIM=3
+	;;
+esac
+
+umask 022
+export CLICOLOR=1
+
+eval "$(pyenv init -)"
