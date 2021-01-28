@@ -39,5 +39,3 @@ esac
 
 umask 022
 export CLICOLOR=1
-
-eval "$(pyenv init -)"
