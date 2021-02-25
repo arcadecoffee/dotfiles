@@ -39,3 +39,8 @@ esac
 
 umask 022
 export CLICOLOR=1
+
+# Load local customizations if they exist 
+if [ -f ~/.zshrc.local ]; then
+    . ~/.zshrc.local
+fi
