@@ -6,4 +6,4 @@ fi
 
 if [[ $0 == *bash* ]] && [ -f ~/.bashrc ]; then source ~/.bashrc; fi
 
-eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
