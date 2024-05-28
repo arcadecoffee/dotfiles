@@ -118,3 +118,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
+# Load local customizations if they exist
+if [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
+fi
+
