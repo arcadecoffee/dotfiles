@@ -40,6 +40,10 @@ esac
 umask 022
 export CLICOLOR=1
 
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+autoload -Uz compinit
+compinit
+
 # Load local customizations if they exist 
 if [ -f ~/.zshrc.local ]; then
     . ~/.zshrc.local
